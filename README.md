@@ -339,23 +339,6 @@ Dokumentasi proyek mencakup:
 
 ---
 
-## 👨‍💻 Project Manager
-
-**Fathin Aznar Al Hanif**
-
-Bertanggung jawab dalam:
-
-* Perencanaan proyek.
-* Pembagian tugas.
-* Pengelolaan GitHub Kanban.
-* Monitoring progress.
-* Dokumentasi.
-* Koordinasi tim.
-* Testing.
-* Finalisasi proyek.
-
----
-
 ## 📞 Kontak
 
 **Tim Pengembang BantuYuk**
