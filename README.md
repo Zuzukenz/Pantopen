@@ -1,6 +1,4 @@
-# 🤝 BantuYuk — Platform Donasi Digital & GIS
-
-**BantuYuk** adalah platform donasi digital yang dirancang untuk menghubungkan **donatur, komunitas sosial, penggalang dana, serta lembaga pemerintah/BPBD** dalam satu ekosistem digital.
+# 🤝 Pembuatan -Platform Donasi Digital & GIS
 
 Platform ini menggabungkan sistem **penggalangan dana, pemetaan lokasi bencana berbasis GIS, pembayaran digital, verifikasi kampanye, serta pelaporan penggunaan dana** untuk membantu menciptakan proses donasi yang lebih mudah, transparan, dan terorganisir.
 
@@ -8,7 +6,7 @@ Platform ini menggabungkan sistem **penggalangan dana, pemetaan lokasi bencana b
 
 ## 🎯 Tujuan
 
-BantuYuk dikembangkan untuk membantu mengatasi beberapa permasalahan dalam penanganan bencana dan penyaluran bantuan sosial, terutama:
+Platform ini dikembangkan untuk membantu mengatasi beberapa permasalahan dalam penanganan bencana dan penyaluran bantuan sosial, terutama:
 
 * Lambatnya penyampaian informasi lokasi bencana.
 * Kesulitan masyarakat dalam menemukan kampanye bantuan.
@@ -57,7 +55,7 @@ Kategori yang direncanakan:
 
 ### 💳 3. Payment Gateway
 
-BantuYuk menyediakan sistem pembayaran donasi secara digital.
+Platform menyediakan sistem pembayaran donasi secara digital.
 
 Integrasi yang direncanakan menggunakan:
 
@@ -126,10 +124,10 @@ Fitur:
 
 ## 🏗️ Struktur Pengembangan
 
-Pengembangan BantuYuk dibagi menjadi beberapa bagian utama:
+Pengembangan Platform dibagi menjadi beberapa bagian utama:
 
 ```text
-BantuYuk
+Web
 │
 ├── Frontend
 │   ├── Homepage
@@ -167,7 +165,7 @@ BantuYuk
 Pengguna
    │
    ▼
-Website BantuYuk
+Website 
    │
    ├──────────────► Melihat Kampanye
    │                     │
@@ -222,7 +220,7 @@ Verifikator
 
 ## 💰 Transparansi Donasi
 
-BantuYuk dirancang untuk memberikan informasi mengenai penggunaan dan pencairan dana.
+Platform Merancang untuk memberikan informasi mengenai penggunaan dan pencairan dana.
 
 ```text
 Donatur
@@ -341,7 +339,7 @@ Dokumentasi proyek mencakup:
 
 ## 📞 Kontak
 
-**Tim Pengembang BantuYuk**
+**Tim PatOpen**
 
 📍 SMKN 9 Medan, Sumatera Utara
 
@@ -349,11 +347,10 @@ Dokumentasi proyek mencakup:
 
 📧 Email:
 
-* [support@bantuyuk.com](mailto:support@bantuyuk.com)
-* [bantuyuk@gmail.com](mailto:bantuyuk@gmail.com)
+* [pantopensupport@gmail.com](mailto:pantopensupport@gmail.com)
 
 ---
 
 ## 📜 License
 
-Project ini dikembangkan sebagai bagian dari proyek **Tim BantuYuk – 2026**.
+Pengembangan sebagai bagian dari proyek **Tim PatOpen – 2026**.
