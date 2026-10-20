@@ -1,0 +1,49 @@
+<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Masuk – BANTUYUK</title><link rel="stylesheet" href="css/style.css"></head>
+<body><div class="auth" style="padding:16px"><div class="authbox">
+<div class="l">
+ <div class="logo" id="lg" style="padding:0"></div>
+ <div class="tabs"><button class="on" id="tl">Masuk</button><button id="tr">Daftar Akun Baru</button></div>
+ <form id="fl"><h1>Selamat Datang Kembali!</h1><p class="muted" style="margin:4px 0 6px">Masuk untuk melanjutkan aksi kemanusiaan dan pemantauan krisis.</p>
+  <label class="f">Email</label><input id="le" type="email" required placeholder="contoh: donatur@bantuyuk.id"><label class="f">Password</label><input id="lp" type="password" required placeholder="••••••••">
+  <button class="btn block" style="margin-top:18px">Masuk ke Dashboard</button>
+  <p class="muted" style="text-align:center;margin-top:14px;font-size:12px">Belum punya akun? <a href="#" id="to-r"><b>Buat Akun Baru</b></a></p></form>
+ <form id="fr" style="display:none"><h1>Bergabung Bersama Kami</h1><p class="muted" style="margin:4px 0 6px">Daftarkan diri untuk berdonasi dan memantau peta bencana.</p>
+  <label class="f">Nama lengkap</label><input id="rn" required placeholder="Budi Santoso"><label class="f">Email</label><input id="re" type="email" required placeholder="budi@bantuyuk.id">
+  <label class="f">Nomor telepon</label><input id="rt" type="tel" required><label class="f">Password</label><input id="rp" type="password" minlength="6" required placeholder="Minimal 6 karakter">
+  <label class="f">Peran akses</label><select id="rr"><option>Donatur</option><option>Relawan</option></select>
+  <button class="btn block" style="margin-top:18px">Daftar &amp; Masuk Langsung</button></form>
+ <div style="border-top:1px solid var(--line);margin-top:20px;padding-top:14px;text-align:center"><span class="muted" style="font-size:12px">Atau masuk tanpa akun: </span><button class="guest" id="gb">Masuk sebagai Tamu</button>
+  <div class="muted" style="font-size:11px;margin-top:4px">Tamu tetap bisa berdonasi, melihat peta, dan mendapat struk.</div></div>
+ <p class="muted" style="margin-top:12px;font-size:12px;text-align:center"><a href="admin-login.html">Panel admin →</a></p>
+</div>
+<div class="r"><div><span class="badge">PLATFORM DONASI &amp; GIS</span><h2 style="margin:14px 0 8px;font-size:22px">Pemetaan Bencana Real-Time Indonesia</h2><p class="muted">Menghubungkan para donatur dengan wilayah terdampak krisis secara presisi, akurat, dan transparan.</p></div>
+ <div><div class="feat"><span>✓ Leaflet + OpenStreetMap GIS</span><span>✓ Data live NASA EONET &amp; FIRMS</span><span>✓ Transparansi Penyaluran Dana</span></div><p class="muted" style="font-size:11px;margin-top:14px">© 2026 BANTUYUK Platform</p></div></div>
+</div></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script src="js/config.js"></script><script src="js/store.js"></script><script src="js/api.js"></script>
+<script>
+lg.innerHTML=I('shield',24)+' BANTUYUK';
+const sw=r=>{fl.style.display=r?'none':'';fr.style.display=r?'':'none';tl.classList.toggle('on',!r);tr.classList.toggle('on',r)};
+tl.onclick=()=>sw(0);tr.onclick=()=>sw(1);document.getElementById('to-r').onclick=e=>{e.preventDefault();sw(1)};
+const users=()=>DB.get('users')||[];
+// Mode backend: sesi pengguna disimpan Supabase Auth; localStorage hanya dipakai untuk penanda tamu.
+const go=u=>{if(!API.on||u.guest)localStorage.setItem('bty_user',JSON.stringify(u));location.href='index.html'};
+fr.onsubmit=async e=>{e.preventDefault();
+ if(API.on){if(!API.sb)return alert('Supabase belum dikonfigurasi (SUPABASE_URL / SUPABASE_ANON_KEY di js/config.js).');
+  const {data,error}=await API.sb.auth.signUp({email:re.value.trim(),password:rp.value,options:{data:{full_name:rn.value.trim(),phone:rt.value.trim(),display_role:rr.value}}});
+  if(error)return alert(/already/i.test(error.message)?'Email sudah terdaftar':error.message);
+  if(!data.session)return alert('Akun berhasil dibuat. Cek email untuk konfirmasi, lalu masuk.');
+  try{await API.call('/me',{method:'PATCH',body:{phone:rt.value.trim()},token:data.session.access_token})}catch(_){}
+  return go({})}
+ const us=users();if(us.some(u=>u.email===re.value.trim()))return alert('Email sudah terdaftar');
+ const u={name:rn.value.trim(),email:re.value.trim(),phone:rt.value,pass:rp.value,role:rr.value};DB.set('users',[...us,u]);go({name:u.name,email:u.email,role:u.role})};
+fl.onsubmit=async e=>{e.preventDefault();
+ if(API.on){if(!API.sb)return alert('Supabase belum dikonfigurasi (SUPABASE_URL / SUPABASE_ANON_KEY di js/config.js).');
+  const {error}=await API.sb.auth.signInWithPassword({email:le.value.trim(),password:lp.value});
+  if(error)return alert('Email atau password salah. Belum punya akun? Klik Daftar Akun Baru.');
+  return go({})}
+ const u=users().find(x=>x.email===le.value.trim()&&x.pass===lp.value);
+ if(!u)return alert('Email atau password salah. Belum punya akun? Klik Daftar Akun Baru.');go({name:u.name,email:u.email,role:u.role})};
+// Tamu: id acak disimpan di perangkat agar riwayat donasi & struk tetap ada saat masuk sebagai tamu lagi
+gb.onclick=async()=>{const g=API.guestId();try{if(API.sb)await API.sb.auth.signOut()}catch(_){}go({name:'Tamu',email:'guest-'+g,role:'Tamu',guest:true})};
+</script></body></html>

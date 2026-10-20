@@ -1,0 +1,19 @@
+<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Login Admin – BANTUYUK</title><link rel="stylesheet" href="css/style.css"></head>
+<body><div class="auth"><form class="card" id="f">
+<div class="logo" id="lg"></div><h1>Login Admin</h1><p class="muted" style="margin:4px 0 8px">Khusus pengelola BANTUYUK.</p>
+<label class="f">Email</label><input id="e" type="email" required autocomplete="username"><label class="f">Password</label><input id="p" type="password" required autocomplete="current-password">
+<div id="err" style="color:#f87171;font-size:12px;margin-top:8px;display:none">Email atau password admin salah.</div>
+<button class="btn block" style="margin-top:16px">Masuk</button><p class="muted" style="margin-top:14px;font-size:12px;text-align:center"><a href="login.html">← Login pengguna</a></p>
+</form></div>
+<script src="js/config.js"></script><script src="js/store.js"></script><script src="js/api.js"></script>
+<script>
+lg.innerHTML=I('shield',24)+' BANTUYUK ADMIN';
+const MSG=err.textContent;
+f.onsubmit=async ev=>{ev.preventDefault();const B=window.BANTUYUK;let ok=false,token=null,demo=false;err.textContent=MSG;
+ if(API.on){ // mode backend: POST /api/admin/login → hanya role=admin (tabel profiles) yang mendapat token
+  try{const j=await API.call('/admin/login',{method:'POST',body:{email:e.value,password:p.value}});ok=!!j.token;token=j.token}catch(er){if(er.status===429||er.status===0)err.textContent=er.message}
+ }else if(API.local){ok=e.value===B.ADMIN_DEMO.email&&p.value===B.ADMIN_DEMO.password;demo=ok} // demo hanya di localhost
+ else err.textContent='Backend belum dikonfigurasi (API_BASE kosong).';
+ if(!ok){err.style.display='block';return}
+ sessionStorage.setItem('bty_admin',JSON.stringify({email:e.value,token,demo}));location.href='admin.html'};
+</script></body></html>

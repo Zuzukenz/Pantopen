@@ -1,0 +1,29 @@
+<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#07142b">
+<title>BANTUYUK – Donasi Digital & Peta Bencana GIS</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.Default.css"><link rel="stylesheet" href="css/style.css"></head>
+<body>
+<div class="toast" id="toast"></div><div class="scrim" id="scrim"></div>
+<div class="app">
+ <aside class="side" id="side"><div class="logo" id="logo"></div><div id="nav"></div><div style="flex:1"></div>
+  <div class="row card" style="padding:10px"><div class="avatar" id="av"></div><div class="grow"><b id="un"></b><div class="muted" id="ur" style="font-size:12px"></div></div><button class="ib" id="lo" title="Keluar"></button></div></aside>
+ <div class="main">
+  <header class="top"><button class="ib menu-btn" id="mb"></button><input class="search" id="q" placeholder="Cari kampanye, lokasi, atau kata kunci…">
+   <div style="flex:1"></div><button class="ib" id="bell"><span class="dot" id="bd" style="display:none"></span></button></header>
+  <div class="pop card" id="pop"></div>
+  <main class="content">
+   <section class="view" id="v-dashboard"></section>
+   <section class="view" id="v-gis"><div class="title" id="t-gis"></div><div class="split gis">
+     <div class="card filters" id="gf" style="max-height:560px;overflow:auto"></div><div><div class="mapbox" id="map"></div><div class="row wrap muted" id="legend" style="margin-top:8px;font-size:12px"></div></div><div class="card" id="gd"><div class="empty">Klik titik di peta untuk melihat detail.</div></div></div></section>
+   <section class="view" id="v-donasi"><div class="title" id="t-donasi"></div><div class="split"><div><input id="cs" placeholder="Cari kampanye…"><div class="row wrap" style="margin:10px 0" id="cc"></div><div id="cl"></div></div><div class="card" id="cd"></div></div></section>
+   <section class="view" id="v-laporan"></section>
+   <section class="view" id="v-relawan"><div class="title" id="t-relawan"></div><div class="split"><div id="vl"></div><div class="card" id="vd"><div class="empty">Pilih kegiatan relawan.</div></div></div></section>
+   <section class="view" id="v-berita"></section>
+   <section class="view" id="v-pengaturan"></section>
+  </main></div></div>
+<nav class="bottom" id="bn"></nav><div class="modal" id="md"><div id="mdc"></div></div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.heat/0.2.0/leaflet-heat.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script src="js/config.js"></script><script src="js/store.js"></script><script src="js/api.js"></script>
+<script>API.boot().then(function(ok){if(!ok)return;var s=document.createElement("script");s.src="js/app.js";document.body.appendChild(s)})</script>
+</body></html>
